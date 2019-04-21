@@ -1,0 +1,54 @@
+{
+  "name": "library-template",
+  "version": "1.0.1",
+  "description": "node.js - types-promises ready library template",
+  "main": "dist/index.js",
+  "typings": "./",
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "tsc --declaration -d ",
+    "postbuild": "./node_modules/.bin/mocha --timeouts=15000 --compilers ts:ts-node/register ./test/*.test.ts",
+    "test": "./node_modules/.bin/mocha --timeouts=15000 --compilers ts:ts-node/register ./test/*.test.ts",
+    "clean": "rimraf dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MaximeGir/nodejs-library-template.git"
+  },
+  "keywords": [
+    "template"
+  ],
+  "author": "Maxime Girard <maxime.g.girard@gmail.com> (http://maximegirard.org)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MaximeGir/nodejs-library-template/issues"
+  },
+  "homepage": "https://github.com/MaximeGir/nodejs-library-template#readme",
+  "devDependencies": {
+    "@types/chai": "^4.1.4",
+    "@types/mocha": "^5.2.4",
+    "@types/nock": "^9.3.0",
+    "chai": "^4.1.2",
+    "coveralls": "^3.0.2",
+    "istanbul": "^0.4.5",
+    "mocha": "^5.2.0",
+    "nock": "^9.4.2",
+    "rimraf": "^2.6.2",
+    "source-map-support": "^0.5.6",
+    "ts-node": "^7.0.0",
+    "tslint": "^5.10.0"
+  },
+  "dependencies": {
+    "@types/config": "0.0.34",
+    "@types/lodash": "^4.14.112",
+    "@types/uuid": "^3.4.3",
+    "config": "^1.30.0",
+    "jsdoc": "^3.5.5",
+    "lodash": "^4.17.11",
+    "request": "^2.87.0",
+    "request-promise-native": "^1.0.5",
+    "superagent": "^4.0.0-beta.5",
+    "typescript": "^2.9.2",
+    "uuid": "^3.3.2"
+  }
+}
