@@ -5,9 +5,9 @@ import { constants } from '../utils/constants';
 export class CalendarComponent implements ICalendarComponent {
 
   private options: ICalendarOptions;
-  private monthsNames: string[];
-  private daysNames: string[];
-  private today: Date;
+  public monthsNames: string[];
+  public daysNames: string[];
+  public today: Date;
 
   constructor(language?: string) {
 
@@ -54,14 +54,14 @@ export class CalendarComponent implements ICalendarComponent {
     return null;
   }
 
-  public getWeeksUntilEndOfYear(): number {
-    const nextYear: number = this.today.getFullYear() + 1;
+  public getWeeksUntilEndOfYear(date: Date): number {
+    const nextYear: number = date.getFullYear() + 1;
     const nextYearDate: Date = new Date(nextYear, 0, 1);
 
     /**
      * Typescript hack found @https://stackoverflow.com/questions/14980014/how-can-i-calculate-the-time-between-2-dates-in-typescript
      */
-    const absoluteWeeks: number = (+nextYearDate - +this.today) / constants.defaults.weekDurationInMillis;
+    const absoluteWeeks: number = (+nextYearDate - +date) / constants.defaults.weekDurationInMillis;
 
     return Math.ceil(absoluteWeeks);
 

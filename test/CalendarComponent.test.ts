@@ -1,7 +1,6 @@
-import { CalendarComponent } from './../components/CalendarComponent';
 import { assert } from 'chai';
 import { ICalendarComponent } from "../interface/ICalendarComponent";
-import { constants } from '../utils/constants';
+import { CalendarComponent } from './../components/CalendarComponent';
 
 const calendar: ICalendarComponent = new CalendarComponent();
 describe("CalendarComponent", () => {
@@ -33,16 +32,16 @@ describe("CalendarComponent", () => {
   });
 
   it("should have months names", async () => {
-    assert.isArray(constants.monthsNames[calendar.getLanguage()]);
+    assert.isArray(calendar.monthsNames);
   });
 
   it("should have today's date", async () => {
     const today = new Date();
-    assert.isTrue(calendar["today"] instanceof Date);
-    assert.equal(calendar["today"].getFullYear(), today.getFullYear());
-    assert.equal(calendar["today"].getHours(), 0);
-    assert.equal(calendar["today"].getMinutes(), 0);
-    assert.equal(calendar["today"].getHours(), 0);
+    assert.isTrue(calendar.today instanceof Date);
+    assert.equal(calendar.today.getFullYear(), today.getFullYear());
+    assert.equal(calendar.today.getHours(), 0);
+    assert.equal(calendar.today.getMinutes(), 0);
+    assert.equal(calendar.today.getHours(), 0);
   });
 
   it("should create date without time", async () => {
@@ -94,7 +93,7 @@ describe("CalendarComponent", () => {
     assert.equal(novembre, "Novembre");
     assert.equal(decembre, "Décembre");
 
-    assert.deepEqual(constants.monthsNames[frenchCalendar.getLanguage()], [
+    assert.deepEqual(frenchCalendar.monthsNames, [
       "Janvier",
       "Février",
       "Mars",
@@ -139,7 +138,7 @@ describe("CalendarComponent", () => {
     assert.equal(noviembre, "Noviembre");
     assert.equal(diciembre, "Diciembre");
 
-    assert.deepEqual(constants.monthsNames[spanishCalendar.getLanguage()], [
+    assert.deepEqual(spanishCalendar.monthsNames, [
       "Enero",
       "Febrero",
       "Marzo",
@@ -183,7 +182,7 @@ describe("CalendarComponent", () => {
     assert.equal(novembre, "November");
     assert.equal(decembre, "December");
 
-    assert.deepEqual(constants.monthsNames[calendar.getLanguage()], [
+    assert.deepEqual(calendar.monthsNames, [
       "January",
       "February",
       "March",
@@ -218,7 +217,7 @@ describe("CalendarComponent", () => {
     assert.equal(vendredi, "Vendredi");
     assert.equal(samedi, "Samedi");
 
-    assert.deepEqual(constants.daysNames[frenchCalendar.getLanguage()], [
+    assert.deepEqual(frenchCalendar.daysNames, [
       "Dimanche",
       "Lundi",
       "Mardi",
@@ -248,7 +247,7 @@ describe("CalendarComponent", () => {
     assert.equal(viernes, "Viernes");
     assert.equal(sabado, "Sábado");
 
-    assert.deepEqual(constants.daysNames[spanishCalendar.getLanguage()], [
+    assert.deepEqual(spanishCalendar.daysNames, [
       "Domingo",
       "Lunes",
       "Martes",
@@ -279,7 +278,7 @@ describe("CalendarComponent", () => {
     assert.equal(friday, "Friday");
     assert.equal(saturday, "Saturday");
 
-    assert.deepEqual(constants.daysNames[englishCalendar.getLanguage()], [
+    assert.deepEqual(englishCalendar.daysNames, [
       "Sunday",
       "Monday",
       "Tuesday",
