@@ -1,7 +1,7 @@
 {
-  "name": "library-template",
-  "version": "1.0.1",
-  "description": "node.js - types-promises ready library template",
+  "name": "smooth-calendar",
+  "version": "0.1.0",
+  "description": "Simple json calendar library",
   "main": "dist/index.js",
   "typings": "./",
   "scripts": {
@@ -13,17 +13,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MaximeGir/nodejs-library-template.git"
+    "url": "git+https://github.com/MaximeGir/smooth-calendar.git"
   },
   "keywords": [
-    "template"
+    "calendar",
+    "json",
+    "smooth",
+    "reminder"
   ],
   "author": "Maxime Girard <maxime.g.girard@gmail.com> (http://maximegirard.org)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/MaximeGir/nodejs-library-template/issues"
+    "url": "https://github.com/MaximeGir/smooth-calendar/issues"
   },
-  "homepage": "https://github.com/MaximeGir/nodejs-library-template#readme",
+  "homepage": "https://github.com/MaximeGir/smooth-calendar#readme",
   "devDependencies": {
     "@types/chai": "^4.1.4",
     "@types/mocha": "^5.2.4",
