@@ -95,3 +95,5 @@ export class Constants {
     };
   }
 }
+
+export const constants: Constants = new Constants();
