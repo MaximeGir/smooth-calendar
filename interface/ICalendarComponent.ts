@@ -1,8 +1,11 @@
+import { ICalendarDay } from "./ICalendarDay";
+
 export interface ICalendarComponent {
 
   monthsNames: string[];
   daysNames: string[];
   today: Date;
+  weeks: ICalendarDay[][];
 
   /**
    * Determine if certain date is a weekend day
@@ -36,9 +39,9 @@ export interface ICalendarComponent {
   /**
    * Build weeks as array of custom date objects for specified week amount
    * @param { number } weeksAmount 
-   * @return { any [][] } Custom object tbd
+   * @return { ICalendarDay[][] } Custom object tbd
     */
-  buildWeeks(weeksAmount: number): any[][];
+  buildWeeks(weeksAmount: number): ICalendarDay[][];
 
   /**
    * Get amount of weeks before next year (xxxx/01/01)

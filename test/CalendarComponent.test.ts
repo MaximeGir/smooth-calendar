@@ -12,17 +12,17 @@ describe("CalendarComponent", () => {
     });
 
     it("should set language to french when specified in the constructor", async () => {
-      const frenchCalendar: ICalendarComponent = new CalendarComponent('french');
+      const frenchCalendar: ICalendarComponent = new CalendarComponent({ language: 'french' });
       assert.equal(frenchCalendar.getLanguage(), 'french');
     });
 
     it("should set language to spanish when specified in the constructor", async () => {
-      const spanishCalendar: ICalendarComponent = new CalendarComponent('spanish');
+      const spanishCalendar: ICalendarComponent = new CalendarComponent({ language: 'spanish' });
       assert.equal(spanishCalendar.getLanguage(), 'spanish');
     });
 
     it("should set language to english when specified in the constructor", async () => {
-      const englishCalendar: ICalendarComponent = new CalendarComponent('english');
+      const englishCalendar: ICalendarComponent = new CalendarComponent({ language: 'english' });
       assert.equal(englishCalendar.getLanguage(), 'english');
     });
   });
@@ -65,7 +65,7 @@ describe("CalendarComponent", () => {
 
   it("should get months names in french when language specified in constructor is french", async () => {
 
-    const frenchCalendar: ICalendarComponent = new CalendarComponent('french');
+    const frenchCalendar: ICalendarComponent = new CalendarComponent({ language: 'french' });
 
     const janvier = frenchCalendar.getMonthName(0);
     const fevrier = frenchCalendar.getMonthName(1);
@@ -110,7 +110,7 @@ describe("CalendarComponent", () => {
   });
 
   it("should get months name in spanish when language specified in constructor is spanish", async () => {
-    const spanishCalendar: ICalendarComponent = new CalendarComponent("spanish");
+    const spanishCalendar: ICalendarComponent = new CalendarComponent({ language: "spanish" });
 
     const enero = spanishCalendar.getMonthName(0);
     const febrero = spanishCalendar.getMonthName(1);
@@ -199,7 +199,7 @@ describe("CalendarComponent", () => {
   });
 
   it("should return french days names", async () => {
-    const frenchCalendar: ICalendarComponent = new CalendarComponent("french");
+    const frenchCalendar: ICalendarComponent = new CalendarComponent({ language: "french" });
 
     const dimanche = frenchCalendar.getDayName(0);
     const lundi = frenchCalendar.getDayName(1);
@@ -229,7 +229,7 @@ describe("CalendarComponent", () => {
   });
 
   it("should return spanish days names", async () => {
-    const spanishCalendar: ICalendarComponent = new CalendarComponent("spanish");
+    const spanishCalendar: ICalendarComponent = new CalendarComponent({ language: "spanish" });
 
     const domingo = spanishCalendar.getDayName(0);
     const lunes = spanishCalendar.getDayName(1);

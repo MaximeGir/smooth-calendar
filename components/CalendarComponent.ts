@@ -1,6 +1,7 @@
-import { ICalendarOptions } from './../interface/ICalendarOptions';
-import { ICalendarComponent } from "../interface/ICalendarComponent";
+import { ICalendarComponent } from '../interface/ICalendarComponent';
 import { constants } from '../utils/constants';
+import { ICalendarDay } from './../interface/ICalendarDay';
+import { ICalendarOptions } from './../interface/ICalendarOptions';
 
 export class CalendarComponent implements ICalendarComponent {
 
@@ -8,8 +9,15 @@ export class CalendarComponent implements ICalendarComponent {
   public monthsNames: string[];
   public daysNames: string[];
   public today: Date;
+  public weeks: ICalendarDay[][];
 
-  constructor(language?: string) {
+  constructor(options?: ICalendarOptions) {
+
+    if (!options) {
+      options = { language: 'english' };
+    } else if (!options.language) {
+      options.language = constants.languages.english;
+    }
 
     const now: Date = new Date();
 
@@ -19,19 +27,21 @@ export class CalendarComponent implements ICalendarComponent {
       now.getDate()
     );
 
-    this.options = {
-      language: constants.languages[language] || constants.languages.english,
+    let defaults: ICalendarOptions = {
+      language: constants.languages[options.language],
       year: this.today.getFullYear(),
       monthIndex: this.today.getMonth(),
-      firstDayOfWeek: 0,
+      firstDayOfWeek: options.firstDayOfWeek || 0,
       showToday: true,
       previousMonth: null,
-      nextMonth: null
+      nextMonth: null,
+      nbWeeks: constants.defaults.numberOfWeeks
     };
+
+    this.options = Object.assign({}, defaults, options);
 
     this.monthsNames = constants.monthsNames[this.options.language];
     this.daysNames = constants.daysNames[this.options.language];
-
   }
 
   public isWeekend(date: Date): boolean {
@@ -50,8 +60,90 @@ export class CalendarComponent implements ICalendarComponent {
     return new Date(year, month + 1, 0).getDate();
   }
 
-  public buildWeeks(weeksAmount: number): any[][] {
-    return null;
+  public buildWeeks(weeksAmount: number): ICalendarDay[][] {
+
+    // TODO refactor !!
+
+    let classNames;
+    let date;
+    let day;
+    let i = 1;
+    let week;
+    let options = this.options;
+
+    this.weeks = [];
+
+    let firstDate = this.createDate(options.year, options.monthIndex, 1);
+    let monthDays = this.getDaysInMonth(options.year, options.monthIndex);
+    let firstDateIndex = firstDate.getDay();
+
+    // Loop through week indexes (0..6)
+    for (let w = 0; w < this.options.nbWeeks; w++) {
+      week = [];
+      let { firstDayOfWeek } = this.options;
+
+      // Loop through the day index (0..6) for each week.
+      for (let d = firstDayOfWeek; d < firstDayOfWeek + 7; d++) {
+        classNames = [];
+        day = {};
+
+        if (w === 0 && d < firstDateIndex) {
+          // Day of Previous Month
+          date = this.createDate(
+            firstDate.getFullYear(),
+            firstDate.getMonth(),
+            1 - (firstDateIndex - d)
+          );
+        } else if (i > monthDays) {
+          // Day of Next Month
+          date = this.createDate(
+            firstDate.getFullYear(),
+            firstDate.getMonth(),
+            i
+          );
+          i += 1;
+        } else {
+          // Day of Current Month
+          classNames.push("month-day");
+          date = this.createDate(
+            firstDate.getFullYear(),
+            firstDate.getMonth(),
+            i
+          );
+
+          i += 1;
+
+          if (
+            options.showToday &&
+            date.toDateString() === this.today.toDateString()
+          ) {
+            classNames.push("today");
+          }
+        }
+
+        if (date && date.getDate) {
+          if (this.isWeekend(date)) {
+            classNames.push("weekend-day");
+          }
+
+          day.className = classNames.join(" ");
+          day.id = "day" + date.getTime();
+          day.day = date.getDate();
+          day.date = date;
+          day.monthIndex = date.getMonth();
+          day.year = date.getFullYear();
+
+          date = undefined;
+        } else {
+          day = { date: null, day: null };
+        }
+
+        week.push(day);
+      }
+
+      this.weeks.push(week);
+    }
+    return this.weeks;
   }
 
   public getWeeksUntilEndOfYear(date: Date): number {
