@@ -1,6 +1,8 @@
+import { constants } from './../utils/constants';
 import { assert } from 'chai';
 import { ICalendarComponent } from "../interface/ICalendarComponent";
 import { CalendarComponent } from './../components/CalendarComponent';
+import { ICalendarDay } from './../interface/ICalendarDay';
 
 const calendar: ICalendarComponent = new CalendarComponent();
 describe("CalendarComponent", () => {
@@ -287,5 +289,15 @@ describe("CalendarComponent", () => {
       "Friday",
       "Saturday"
     ]);
+  });
+
+  describe("weeks component", () => {
+    it("should produce weeks for 6 weeks by default", async () => {
+      const calendar: ICalendarComponent = new CalendarComponent();
+      const weeks: ICalendarDay[][] = calendar.buildWeeks(constants.defaults.numberOfWeeks);
+
+      assert.deepEqual(weeks, calendar.weeks);
+
+    });
   });
 });

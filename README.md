@@ -9,6 +9,10 @@ Currently in development so keep in mind it's a work in progress. More informati
 const calendar: ICalendarComponent = new CalendarComponent();
 
 // interface definition 
+  monthsNames: string[];
+  daysNames: string[];
+  today: Date;
+  weeks: ICalendarDay[][];
 
   /**
    * Determine if certain date is a weekend day
@@ -42,9 +46,9 @@ const calendar: ICalendarComponent = new CalendarComponent();
   /**
    * Build weeks as array of custom date objects for specified week amount
    * @param { number } weeksAmount 
-   * @return { any [][] } Custom object tbd
+   * @return { ICalendarDay[][] } Custom object tbd
     */
-  buildWeeks(weeksAmount: number): any[][];
+  buildWeeks(weeksAmount: number): ICalendarDay[][];
 
   /**
    * Get amount of weeks before next year (xxxx/01/01)

@@ -19,6 +19,9 @@ export class CalendarComponent implements ICalendarComponent {
       options.language = constants.languages.english;
     }
 
+    this.monthsNames = constants.monthsNames[options.language];
+    this.daysNames = constants.daysNames[options.language];
+
     const now: Date = new Date();
 
     this.today = this.createDate(
@@ -27,21 +30,19 @@ export class CalendarComponent implements ICalendarComponent {
       now.getDate()
     );
 
+
     let defaults: ICalendarOptions = {
       language: constants.languages[options.language],
       year: this.today.getFullYear(),
       monthIndex: this.today.getMonth(),
       firstDayOfWeek: options.firstDayOfWeek || 0,
       showToday: true,
-      previousMonth: null,
-      nextMonth: null,
+      previousMonth: this.getMonthName(this.today.getMonth() - 1),
+      nextMonth: this.getMonthName(this.today.getMonth() + 1),
       nbWeeks: constants.defaults.numberOfWeeks
     };
 
     this.options = Object.assign({}, defaults, options);
-
-    this.monthsNames = constants.monthsNames[this.options.language];
-    this.daysNames = constants.daysNames[this.options.language];
   }
 
   public isWeekend(date: Date): boolean {
