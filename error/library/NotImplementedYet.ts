@@ -1,8 +1,8 @@
 import { BaseError } from "../BaseError";
-import { IApiError } from "../../interface/IApiError";
+import { ILibraryError } from "../../interface/ILibraryError";
 
-export class NotFound extends BaseError {
-    constructor(code: string, message: string, target: string, details: Array<IApiError>) {
+export class NotIMplementedYet extends BaseError {
+    constructor(code: string, message: string, target: string, details: Array<ILibraryError>) {
         super(code, message, target, details);
         this.code = code;
         this.message = message;
@@ -10,4 +10,3 @@ export class NotFound extends BaseError {
         this.details = details;
     }
 }
-

@@ -1,4 +1,4 @@
-export interface IApiError {
+export interface ILibraryError {
   /**
    * Error code, application specific
    */
@@ -17,15 +17,15 @@ export interface IApiError {
   /**
    * Including sub-errors
    */
-  details?: Array<IApiError>;
+  details?: Array<ILibraryError>;
 
   /**
    * Add a detail
    */
-  addDetail(detail: IApiError): void;
+  addDetail(detail: ILibraryError): void;
 
   /**
    * Add details
    */
-  addDetails(details: Array<IApiError>): void;
+  addDetails(details: Array<ILibraryError>): void;
 }

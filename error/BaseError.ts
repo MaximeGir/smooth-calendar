@@ -1,24 +1,25 @@
-import {IApiError} from "../interface/IApiError";
+import { ILibraryError } from "../interface/ILibraryError";
 
-export class BaseError extends Error implements IApiError {
+export class BaseError extends Error implements ILibraryError {
     code: string;
     message: string;
     target: string;
-    details: Array<IApiError>;
-    constructor(code: string, message: string, target: string, details: Array<IApiError>) {
+    details: Array<ILibraryError>;
+    constructor(code: string, message: string, target: string, details: Array<ILibraryError>) {
 
         super();
         this.code = code;
         this.message = message;
         this.target = target;
         this.details = details;
+
     }
 
-    public addDetail(detail: IApiError): void {
+    public addDetail(detail: ILibraryError): void {
         this.details.push(detail);
     }
 
-    public addDetails(details: Array<IApiError>): void {
+    public addDetails(details: Array<ILibraryError>): void {
         this.details.push(...details);
     }
 }
