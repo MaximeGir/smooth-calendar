@@ -48,7 +48,7 @@ const calendar: ICalendarComponent = new CalendarComponent();
    * @param { number } weeksAmount 
    * @return { ICalendarDay[][] } Custom object tbd
     */
-  buildWeeks(weeksAmount: number): ICalendarDay[][];
+  buildWeeks(weeksAmount?: number): ICalendarDay[][];
 
   /**
    * Get amount of weeks before next year (xxxx/01/01)

@@ -61,7 +61,7 @@ export class CalendarComponent implements ICalendarComponent {
     return new Date(year, month + 1, 0).getDate();
   }
 
-  public buildWeeks(weeksAmount: number): ICalendarDay[][] {
+  public buildWeeks(weeksAmount?: number): ICalendarDay[][] {
 
     // TODO refactor !!
 
@@ -78,8 +78,9 @@ export class CalendarComponent implements ICalendarComponent {
     let monthDays = this.getDaysInMonth(options.year, options.monthIndex);
     let firstDateIndex = firstDate.getDay();
 
+    const weekCount: number = weeksAmount || this.options.nbWeeks;
     // Loop through week indexes (0..6)
-    for (let w = 0; w < this.options.nbWeeks; w++) {
+    for (let w = 0; w < weekCount; w++) {
       week = [];
       let { firstDayOfWeek } = this.options;
 

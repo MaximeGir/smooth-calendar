@@ -294,9 +294,27 @@ describe("CalendarComponent", () => {
   describe("weeks component", () => {
     it("should produce weeks for 6 weeks by default", async () => {
       const calendar: ICalendarComponent = new CalendarComponent();
-      const weeks: ICalendarDay[][] = calendar.buildWeeks(constants.defaults.numberOfWeeks);
+      const weeks: ICalendarDay[][] = calendar.buildWeeks();
 
       assert.deepEqual(weeks, calendar.weeks);
+      assert.equal(weeks.length, 6);
+
+    });
+
+    it("should produce user-defined number of weeks in calendar", async () => {
+      const calendar: ICalendarComponent = new CalendarComponent({ nbWeeks: 52 });
+      const weeks: ICalendarDay[][] = calendar.buildWeeks();
+
+      assert.deepEqual(weeks, calendar.weeks);
+      assert.equal(weeks.length, 52);
+
+    });
+
+    it("should return remaining weeks until end of year", async () => {
+      const calendar: ICalendarComponent = new CalendarComponent();
+      const nbWeeks: number = calendar.getWeeksUntilEndOfYear(new Date(1900, 0, 9));
+
+      assert.equal(nbWeeks, 51);
 
     });
   });
